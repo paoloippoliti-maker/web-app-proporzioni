@@ -1,0 +1,540 @@
+<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Proporzioni Lab 1.0.25</title><style>:root{font-family:system-ui,Arial;color:#17263a;background:#f3f6fb}*{box-sizing:border-box}body{margin:0}header{background:#173d70;color:white;padding:16px 22px}header h1{margin:0;font-size:25px}header small{opacity:.85}nav{display:flex;flex-wrap:wrap;gap:8px;padding:12px;background:white;border-bottom:1px solid #d7dfeb}button,select,input{font:inherit}button{cursor:pointer;border:1px solid #9eb2cc;border-radius:9px;padding:10px 14px;background:white;color:#173d70}button.active,.primary{background:#246bb5;color:white;border-color:#246bb5}main{max-width:1150px;margin:auto;padding:18px}.panel{background:white;border:1px solid #dbe3ef;border-radius:14px;padding:18px;margin-bottom:14px}.controls{display:flex;flex-wrap:wrap;gap:14px;align-items:center}.controls label{display:flex;gap:6px;align-items:center}.num{width:90px;padding:9px;border:1px solid #aebdd0;border-radius:8px}.formula{font-size:clamp(22px,4vw,34px);text-align:center;margin:16px 0}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px}.note{color:#53657d}.ok{color:#087348}.bad{color:#b12c3b}.bars{display:grid;gap:12px}.barrow{display:flex;align-items:center;gap:12px}.barrow b{width:28px}.bar{height:25px;border-radius:4px;min-width:2px}.blue{background:#3286d2}.orange{background:#e59a3c}.hundred{display:grid;grid-template-columns:repeat(10,1fr);gap:3px;max-width:420px}.cell{aspect-ratio:1;background:#dfe5ee;border-radius:3px}.cell.filled{background:#3286d2}canvas{width:100%;max-width:650px;border:1px solid #dce5f0;border-radius:8px;touch-action:none}section[hidden],.algebra[hidden],.visual[hidden]{display:none}footer{padding:20px;text-align:center;color:#53657d}@media(max-width:600px){.panel{padding:12px}nav button{flex:1 1 42%}}.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.05;font-size:.85em;margin:0 .15em}.frac span:first-child{border-bottom:1.5px solid currentColor;padding:0 3px 3px}.frac span:last-child{padding:3px 3px 0}.xval{font:inherit;width:86px;padding:8px;text-align:center;border:1px solid #b7c8d9;border-radius:6px}.xval.entered{background:#eaf3ff;border-color:#287ac5}.xval.computed{background:#e8f7ed;border-color:#2b9560}.xval:disabled{opacity:1;color:#16683d;-webkit-text-fill-color:#16683d}#values td{min-width:90px}#values{display:block;overflow-x:auto;max-width:100%} .pct-charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px;margin-top:20px}.pct-chart{border:1px solid #dbe3ef;border-radius:12px;padding:16px;min-width:0}.pct-chart h3{margin:0 0 14px}.pct-track{height:36px;border-radius:8px;overflow:hidden;display:flex;background:#e0e7f0}.pct-fill{background:#3286d2;height:100%;transition:width .15s}.pct-rest{background:#e0e7f0;flex:1}.pct-legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px;font-size:14px}.pct-key{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px}.pct-pie{width:min(220px,100%);aspect-ratio:1;border-radius:50%;margin:8px auto;border:1px solid #cbd5e1}.pct-center{text-align:center;font-size:20px;font-weight:700} .pct-note{font-size:13px;color:#53657d;margin-top:8px}.pct-charts{grid-template-columns:repeat(2,minmax(0,1fr));align-items:stretch}.pct-chart{display:flex;flex-direction:column;gap:10px}.pct-chart h3{margin:0}.pct-chart .hundred{width:100%;max-width:310px;margin:auto}.pct-chart .pct-pie{width:min(190px,80%);margin:4px auto}.pct-control{margin-top:auto;padding-top:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}.pct-control input[type=range]{flex:1;min-width:95px;accent-color:#246bb5;touch-action:pan-y}.pct-control output{font-weight:700;min-width:48px;text-align:right}.pct-thermo-wrap{display:flex;align-items:center;justify-content:center;gap:15px;min-height:190px}.pct-thermo{height:180px;width:45px;border:2px solid #a9b9ca;border-radius:12px;overflow:hidden;background:#e0e7f0;display:flex;align-items:end}.pct-thermo-fill{width:100%;background:#3286d2;transition:height .1s}.pct-ticks{height:180px;display:flex;flex-direction:column;justify-content:space-between;font-size:12px;color:#53657d}.pct-track{margin-top:24px}.pct-chart .pct-legend{margin-top:4px}@media(max-width:650px){.pct-charts{grid-template-columns:1fr}}.ratio-click{cursor:pointer;border:2px dashed transparent;border-radius:6px;padding:5px}.ratio-click:hover,.ratio-click:focus{border-color:#246bb5}.ratio-click.hidden-term{background:#fff1cc;color:#805100}.history-line{padding:6px 0;border-bottom:1px solid #e0e7f0}.property-error{color:#b12c3b}#propertyFormula{overflow-wrap:anywhere}@media(max-width:650px){#propertyLab .controls button{flex:1 1 40%}}.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.12;font-size:.85em;margin:0 .14em}.frac span:first-child{border-bottom:1.6px solid currentColor;padding:0 .22em .1em}.frac span:last-child{padding:.1em .22em 0}.unknown-input{background:#fff2cc!important;text-align:center;font-weight:700;color:#995b00}.property-arrows{display:block;width:min(100%,420px);height:auto;margin:8px auto 0;overflow:visible}.secret-bar{display:none!important}.step-panel{border:1px solid #dbe4f0;border-radius:10px;padding:12px;margin:12px 0}.step-panel .formula{margin:10px 0}.unknown{color:#a15b00}.ratio-click{display:inline-block;vertical-align:middle}
+ .property-flow{position:relative;padding:10px 4px 16px;overflow-x:auto}.property-flow .flow-formula{display:flex;justify-content:center;align-items:center;gap:12px;white-space:nowrap;font-size:clamp(20px,2.7vw,32px);padding:14px 8px;position:relative;z-index:1}.property-flow .flow-formula span.term{display:inline-flex;align-items:center;gap:2px;padding:3px 5px;border-radius:6px;cursor:pointer;position:relative}.property-flow .flow-formula span.term:focus-visible{outline:2px solid #246bb5}.property-flow .flow-formula span.term.selected{background:#e2efff;outline:2px solid #246bb5}.property-flow .flow-formula .term-part{display:inline-flex;align-items:center}.property-flow .flow-formula .term-part.selected{background:#e2efff}.property-flow .flow-gap{height:100px;position:relative}.property-flow .flow-arrows{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;overflow:visible}.property-flow .flow-arrows path{fill:none;stroke-width:2.5;opacity:.85;transition:opacity .15s;stroke-dasharray:1000;stroke-dashoffset:1000;animation:none}@keyframes drawGuided{to{stroke-dashoffset:0}}.property-flow .just-written{animation:none}@keyframes appearGuided{from{opacity:0}to{opacity:1}}.property-flow .flow-arrows path.arrow-open-head{stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;fill:none;opacity:1}.property-flow .flow-arrows path.dimmed{opacity:.16}.property-flow .flow-arrows path.emphasis{stroke-width:4.5;opacity:1}.property-flow .flow-caption{text-align:center;color:#53657d;font-size:13px}.property-flow .flow-final{border-top:1px solid #e0e7f0;margin-top:8px;padding-top:8px}.property-flow .flow-heading{font-size:14px;color:#53657d;margin-top:8px}.property-flow .flow-formula .term{font-size:inherit}@media(max-width:650px){.property-flow .flow-formula{gap:5px;font-size:22px}.property-flow .flow-gap{height:85px}}
+.fundamental-arrows{display:block;width:min(100%,420px);height:auto;margin:auto}.fundamental-step .formula{margin-bottom:0}.fundamental-step h3{font-size:17px}.step-panel .frac{font-size:.9em}.property-paired{display:grid;grid-template-columns:minmax(0,7fr) minmax(260px,3fr);gap:12px;align-items:start}.property-paired .property-flow{grid-column:1;grid-row:1;margin:0;min-width:0}.property-paired .verification-side{grid-column:2;grid-row:1;position:relative;min-width:0;display:flex;flex-direction:column;gap:12px;align-self:start}.verification-side .fundamental-step{margin:0;position:static;left:auto;right:auto;width:100%;box-sizing:border-box;min-width:0;height:auto;overflow-wrap:anywhere}.fundamental-step h3{text-align:center;font-size:17px;margin:4px 0 10px}.fundamental-step .formula{font-size:clamp(18px,2.1vw,28px);overflow-wrap:anywhere;word-break:normal;max-width:100%}.property-flow .flow-heading{max-width:45%;line-height:1.35}.property-flow .flow-heading .second-line{display:block}@media(max-width:700px){.property-paired{grid-template-columns:1fr}.property-paired .property-flow,.property-paired .verification-side{grid-column:1;grid-row:auto}.verification-side .fundamental-step{position:static}.property-flow .flow-heading{max-width:100%}}.verification-final-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}.verification-final-row .step-panel{margin:0;min-width:0}@media(max-width:850px){.property-paired{grid-template-columns:1fr}.property-paired .property-flow,.property-paired .verification-side{grid-column:1;grid-row:auto}.verification-side .fundamental-step{position:static}.property-flow .flow-heading{max-width:100%}}@media(max-width:550px){.verification-final-row{grid-template-columns:1fr}}.fundamental-cross .formula{font-size:clamp(16px,1.8vw,24px);overflow-wrap:anywhere}.fundamental-cross .note{text-align:center;font-size:12px;margin:4px 0}
+/* 1.0.25: compact terms and stable, persistent black links. */
+.property-flow .flow-formula{gap:0!important;justify-content:center;letter-spacing:0;}
+.property-flow .flow-formula>span{justify-self:center;white-space:nowrap;}
+.property-flow .flow-formula .term{padding:3px 2px!important;gap:1px!important;}
+.property-flow .flow-arrows path{stroke:#111!important;stroke-width:2.5;stroke-dasharray:none;stroke-dashoffset:0;animation:none;opacity:.9;}
+.property-flow .flow-arrows path.drawing{stroke-dasharray:1000;stroke-dashoffset:1000;animation:none;}
+.property-flow .flow-arrows path.dimmed{opacity:.13;}
+.property-flow .flow-arrows path.emphasis{stroke-width:4.5;opacity:1;}
+#activePropertyFlow.is-animating [data-role="middle"] .term,#activePropertyFlow.is-animating [data-role="middle"] > span:not(.term){visibility:hidden}#activePropertyFlow.is-animating .flow-arrows path[data-to]{visibility:hidden}#activePropertyFlow.is-animating .flow-arrows{pointer-events:none}</style><style>
+/* v1.0.25: frazioni negative e cancellazione didattica */
+.neg-standalone{display:inline-flex;align-items:center;white-space:nowrap;gap:.03em}
+.neg-standalone .frac{vertical-align:middle}
+.cancel-demo{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;font-size:1.3em;margin:14px auto}
+.cancel-frac{display:inline-flex;flex-direction:column;align-items:center;position:relative;min-width:64px;line-height:1.45}
+.cancel-frac .cpart{position:relative;padding:1px 15px}
+.cancel-frac .cpart:after{content:"";position:absolute;left:8%;top:52%;width:85%;height:2px;background:#b63838;transform:rotate(-29deg);transform-origin:center}
+.cancel-frac .cbar{width:100%;border-top:2px solid currentColor}
+.cancel-frac .reduced{position:absolute;left:calc(100% - 6px);top:-.5em;font-size:.65em;font-weight:700;color:#167044;background:var(--panel,#fff);padding:0 3px}
+.cancel-frac .denom .reduced{top:auto;bottom:-.35em}
+.verification-final-row .step-panel{min-width:0}
+</style></head><body><header><h1>Proporzioni Lab <small>1.0.25 · animazioni e collegamenti</small></h1><small>Esplora, esercitati e scopri i collegamenti matematici</small></header><nav id="nav"><button data-page="proporzioni" class="active">Proporzioni</button><button data-page="proporzionalita">Proporzionalità</button><button data-page="percentuali">Percentuali</button><button data-page="connessioni">Connessioni</button></nav><main><div class="panel controls"><label>Livello <select id="level"><option value="1">1 · Base</option><option value="2">2 · Intermedio</option><option value="3">3 · Avanzato</option></select></label><label>Modalità <select id="mode"><option value="explore">Esplora</option><option value="practice">Esercitati</option><option value="test">Verifica</option></select></label><label>Visualizzazione <select id="view"><option value="both">Entrambe</option><option value="algebra">Algebrica</option><option value="visual">Visiva</option></select></label><button id="reset">Ripristina dati</button></div><section id="proporzioni"><div class="panel"><h2>Laboratorio delle proporzioni</h2><p>Modifica i quattro termini della relazione a : b = c : d.</p><div class="panel" style="background:#f6f9ff"><h3>Generatore casuale</h3><div class="controls"><label>Tipo <select id="genType"><option value="complete">Quattro termini visibili</option><option value="unknown">Un termine incognito</option><option value="two">Due termini incogniti</option><option value="mixed">Casuale</option></select></label><label>Posizione incognita <select id="genPosition"><option value="random">Casuale</option><option value="extreme">Estremo</option><option value="middle">Medio</option><option value="pair01">1° e 2° termine</option><option value="pair02">1° e 3° termine</option><option value="pair03">1° e 4° termine</option><option value="pair12">2° e 3° termine</option><option value="pair13">2° e 4° termine</option><option value="pair23">3° e 4° termine</option></select></label><button class="primary" id="generateRatio">Nuova proporzione</button></div><p class="note">Il generatore usa il livello di difficoltà selezionato in alto. Puoi anche nascondere un termine cliccando sul suo valore.</p></div><div class="controls" id="ratioInputs"></div><div class="panel" id="algebraBuilder" style="background:#f6f9ff">
+<h3>Proporzioni con due termini contenenti x</h3>
+<p class="note">Seleziona esattamente due posizioni e genera un esempio, oppure scrivi direttamente i quattro termini. Sono ammessi x, +x, x+n, n+x, x−n e n−x, con una sola operazione.</p>
+<div class="controls" id="algebraPositions">
+<label><input type="checkbox" value="0" checked> 1° termine</label>
+<label><input type="checkbox" value="1" checked> 2° termine</label>
+<label><input type="checkbox" value="2"> 3° termine</label>
+<label><input type="checkbox" value="3"> 4° termine</label>
+<button id="generateAlgebra" class="primary" type="button">Genera con due incognite</button>
+</div>
+<div class="controls" id="algebraInputs">
+<label>1° <input class="num" id="alg0" value="+x+2" aria-label="Primo termine"></label>
+<label>2° <input class="num" id="alg1" value="+x" aria-label="Secondo termine"></label>
+<label>3° <input class="num" id="alg2" value="7" aria-label="Terzo termine"></label>
+<label>4° <input class="num" id="alg3" value="5" aria-label="Quarto termine"></label>
+<button id="applyAlgebra" type="button">Usa questi termini</button>
+<button id="exitAlgebra" type="button">Torna ai termini numerici</button>
+</div>
+<p id="algebraFeedback" role="status" class="note"></p>
+</div><div class="algebra"><div class="formula" id="ratioFormula"></div><p id="ratioCheck"></p></div><div class="visual"><h3>Segmenti proporzionali</h3><div class="bars" id="bars"></div><p class="note">Le lunghezze sono rappresentate in scala rispetto al valore massimo.</p></div><div class="controls"><button id="hideTerm">Nascondi un termine</button><label id="answerWrap" hidden>Valore mancante <input id="answer" class="num" type="text" inputmode="decimal" placeholder="es. 5/2"></label><button id="checkAnswer" hidden>Controlla</button><button id="showSolution" hidden>Mostra soluzione</button><span id="answerResult"></span></div><div class="panel" id="propertyLab"><h2>Proprietà delle proporzioni</h2><p>Applica una proprietà alla proporzione corrente; puoi combinarne più di una e tornare indietro.</p><div class="controls"><label>Proprietà <select id="propertyChoice"><option value="invert">Invertire</option><option value="middle">Permutare i medi</option><option value="extreme">Permutare gli estremi</option><option value="composeB">Comporre (somma su conseguente)</option><option value="composeA">Comporre (somma su antecedente)</option><option value="decomposeB">Scomporre (differenza su conseguente)</option><option value="decomposeA">Scomporre (differenza su antecedente)</option></select></label><button class="primary" id="applyProperty">Applica proprietà</button><button id="undoProperty">Indietro</button><button id="resetProperties">Torna all'iniziale</button></div><div class="controls"><label>Passaggi <select id="stepsMode"><option value="all">Tutti i passaggi</option><option value="guided">Passo dopo passo</option></select></label><button id="stepPrev">◀ Precedente</button><button id="stepNext">Successivo ▶</button></div><div id="propertyDetails"></div><div class="formula" id="propertyFormula"></div><p id="propertyMessage" role="status"></p><div id="propertyHistory" class="note"></div><p class="note">Le trasformazioni sono ammesse soltanto quando tutti i denominatori dei rapporti risultanti sono diversi da zero. La proprietà dello scomporre è valida anche con differenze negative.</p></div></div></section><section id="proporzionalita" hidden><div class="panel"><h2>Proporzionalità</h2><div class="controls"><label>Tipo <select id="kind"><option value="direct">Diretta</option><option value="inverse">Inversa</option></select></label><label>Costante k = <input id="kNum" type="number" step="1" class="num" value="2" aria-label="Numeratore k" style="width:75px"> / <input id="kDen" type="number" step="1" class="num" value="3" aria-label="Denominatore k" style="width:75px"></label><span id="kError" class="bad"></span></div><div class="algebra"><div class="formula" id="equation"></div><p id="relationInfo"></p><p class="note">Inserisci x oppure y in ciascuna colonna: l’altra casella viene calcolata. Blu = dato inserito; verde = risultato. Per cambiare verso, cancella il dato blu e inserisci quello desiderato nell’altra riga.</p><button id="clearValues" type="button">Svuota tabella</button><table id="values" style="border-spacing:10px;text-align:center"></table><p id="tableError" class="bad" role="status"></p></div><div class="visual"><canvas id="graph" width="640" height="360" aria-label="Grafico cartesiano della proporzionalità"></canvas></div></div></section><section id="percentuali" hidden><div class="panel"><h2>Laboratorio delle percentuali</h2><div class="controls"><label>Totale <input id="total" class="num" type="number" step="any" value="100"></label><label>Percentuale <input id="percent" class="num" type="number" min="0" max="100" step="1" value="40"></label><input id="percentSlider" type="range" min="0" max="100" value="40"></div><div class="algebra"><div class="formula" id="percentFormula"></div></div><div class="visual"><div class="pct-charts"><div class="pct-chart"><h3>Griglia dei 100 quadratini</h3><div id="hundred" class="hundred"></div><p class="pct-note">Ogni quadratino rappresenta l’1% del totale.</p><div class="pct-control"><label for="sliderGrid">Percentuale</label><input id="sliderGrid" class="pct-linked" type="range" min="0" max="100" step="1" value="40"><output class="pct-output">40%</output></div></div><div class="pct-chart"><h3>Grafico a torta</h3><div id="pctPie" class="pct-pie" role="img" aria-label="Grafico a torta delle percentuali"></div><div id="pctPieLabel" class="pct-center"></div><div class="pct-legend" id="pctPieLegend"></div><div class="pct-control"><label for="sliderPie">Percentuale</label><input id="sliderPie" class="pct-linked" type="range" min="0" max="100" step="1" value="40"><output class="pct-output">40%</output></div></div><div class="pct-chart"><h3>Barra orizzontale</h3><div class="pct-track" role="img" id="pctBar" aria-label="Barra percentuale"><div id="pctFill" class="pct-fill"></div><div class="pct-rest"></div></div><div class="pct-legend" id="pctBarLegend"></div><div class="pct-control"><label for="sliderBar">Percentuale</label><input id="sliderBar" class="pct-linked" type="range" min="0" max="100" step="1" value="40"><output class="pct-output">40%</output></div></div><div class="pct-chart"><h3>Termometro percentuale</h3><div class="pct-thermo-wrap"><div class="pct-ticks"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0%</span></div><div class="pct-thermo" role="img" id="pctThermo" aria-label="Termometro percentuale"><div class="pct-thermo-fill" id="pctThermoFill"></div></div></div><div class="pct-control"><label for="sliderThermo">Percentuale</label><input id="sliderThermo" class="pct-linked" type="range" min="0" max="100" step="1" value="40"><output class="pct-output">40%</output></div></div></div><p class="pct-note" id="pctChartNote"></p></div></div><div class="panel" style="margin-top:18px"><h3>Applicazione: sconto o aumento</h3><div class="controls"><label>Prezzo iniziale (€) <input class="num" id="price" type="number" value="80" step="any"></label><label>Variazione (%) <input class="num" id="change" type="number" value="-20" step="any"></label></div><p id="priceResult"></p></div></div></section><section id="connessioni" hidden><div class="panel"><h2>Connessioni matematiche</h2><p>I dati provengono dal laboratorio delle proporzioni. Quando b e d sono diversi da zero e i rapporti sono equivalenti, possiamo leggere la stessa relazione in modi diversi.</p><div id="connections"></div><div class="controls"><button data-go="proporzioni">Modifica proporzione</button><button data-go="proporzionalita">Apri grafico</button><button data-go="percentuali">Apri percentuali</button></div></div></section><section id="exercise" hidden><div class="panel"><h2 id="exerciseTitle">Esercizio</h2><p id="question"></p><div class="controls"><label>Risposta <input type="number" step="any" id="exerciseAnswer" class="num"></label><button id="exerciseCheck" class="primary">Verifica risposta</button><button id="nextExercise">Nuovo esercizio</button></div><p id="feedback"></p><p id="score"></p></div></section></main><footer>Proporzioni Lab · versione iniziale da collaudare · funziona anche offline</footer><script>
+// Aritmetica razionale esatta per gli input decimali e frazionari.
+function gcdExact(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b]}return a||1}
+function rat(n,d=1){if(!Number.isSafeInteger(n)||!Number.isSafeInteger(d)||d===0)return null;if(d<0){n=-n;d=-d}let g=gcdExact(n,d);return [n/g,d/g]}
+function parseRat(input){let t=String(input).trim().replace(/\s+/g,'').replace(/,/g,'.');if(!t)return null;let parts=t.split(/[/:]/);if(parts.length>2)return null;function decimal(x){if(!/^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$/.test(x))return null;let [i,f='']=x.split('.');if(f.length>9)return null;return rat(Number(i+f),10**f.length)}let a=decimal(parts[0]);if(!a)return null;if(parts.length===1)return a;let b=decimal(parts[1]);if(!b||!b[0])return null;return rat(a[0]*b[1],a[1]*b[0])}
+function rationalText(v){let r=Array.isArray(v)?v:parseRat(v);if(!r)return '—';return r[1]===1?String(r[0]):r[0]+'/'+r[1]}
+function rationalHTML(v){let r=Array.isArray(v)?v:parseRat(v);if(!r)return '—';return r[1]===1?String(r[0]):`<span class="frac"><span>${r[0]}</span><span>${r[1]}</span></span>`}
+function ratValue(v){let r=parseRat(v);return r?r[0]/r[1]:NaN}
+function displayTerm(v){return rationalHTML(String(v))}
+function symbolicTerm(s){return s==='x'?'<strong class="unknown">x</strong>':s}
+function displayRatioTerm(value){
+ const t=String(value).trim();
+ if(/^[-−]\\d+(?:[.,]\\d+)?$/.test(t))return '('+t+')';
+ if(/^<span class="frac"><span>[-−]/.test(t))return `<span class="neg-standalone">(${t})</span>`;
+ return t;
+}
+function ratioMarkup(arr){return arr.map((v,i)=>`<span>${displayRatioTerm(v)}</span>${i===0||i===2?' <span>:</span> ':i===1?' <span>=</span> ':''}`).join('')}
+const $=id=>document.getElementById(id);const state={a:2,b:5,c:8,d:20,page:'proporzioni',hidden:null,solved:false,correct:0,attempts:0,question:null};const fmt=x=>Number.isFinite(x)?Number(x.toFixed(5)).toLocaleString('it-IT'):'—';const eq=(x,y)=>Math.abs(x-y)<1e-8*Math.max(1,Math.abs(x),Math.abs(y));function syncRatio(){algebraTerms=null;algebraSolution=null;resetPropertySteps();state.hidden=null;state.solved=false;for(const key of ['a','b','c','d']){let v=ratValue($(key).value);if(Number.isFinite(v))state[key]=v} $('answerWrap').hidden=true;$('checkAnswer').hidden=true;$('showSolution').hidden=true;render()}
+function render(){const {a,b,c,d}=state,ratio=b!==0?a/b:NaN,valid=b!==0&&d!==0&&[a,b,c,d].every(Number.isFinite),isProp=valid&&eq(a*d,b*c);
+$('ratioInputs').querySelectorAll('input').forEach(el=>{const secret=state.hidden===el.id&&!state.solved;el.style.visibility='visible';el.disabled=secret;el.value=secret?'?':rationalText(String(state[el.id]));el.classList.toggle('unknown-input',secret)});
+$('ratioFormula').innerHTML=['a','b','c','d'].map((key,i)=>`<span class="ratio-click ${state.hidden===key&&!state.solved?'hidden-term':''}" role="button" tabindex="0" data-hide="${key}" title="Clicca per nascondere questo termine">${state.hidden===key&&!state.solved?'x':displayTerm(state[key])}</span>${i===0||i===2?' : ':i===1?' = ':''}`).join('');
+if(algebraTerms){$('ratioFormula').innerHTML=ratioMarkup(algebraTerms.map(algebraDisplay));}
+$('ratioCheck').innerHTML=state.hidden&&!state.solved?'Termine incognito: risolvi e premi Controlla per verificare.':valid?`<strong class="${isProp?'ok':'bad'}">${isProp?'✓ Proporzione verificata':'✕ Non è una proporzione'}</strong> — Estremi: ${displayTerm(a)} × ${displayTerm(d)} = ${displayTerm(a*d)}; medi: ${displayTerm(b)} × ${displayTerm(c)} = ${displayTerm(b*c)}.`:'I secondi e quarti termini devono essere diversi da zero.';
+if(algebraTerms){$('ratioCheck').innerHTML='<span class="ok">Proporzione algebrica pronta: applica una proprietà per ricavare x.</span>';} 
+renderPropertyLab();const max=Math.max(1,...[a,b,c,d].filter((_,i)=>ratioKeys[i]!==state.hidden||state.solved).map(Math.abs));$('bars').innerHTML=['a','b','c','d'].map((key,i)=>{let secret=state.hidden===key&&!state.solved;return `<div class="barrow"><b>${key}</b><div class="bar ${i<2?'blue':'orange'} ${secret?'secret-bar':''}" style="width:${secret?'0':Math.abs(state[key])/max*78+'%'}"></div><span>${secret?'?':displayTerm(state[key])}</span></div>`}).join('');
+if(algebraTerms){$('bars').innerHTML='<p class="note">I segmenti numerici sono sospesi durante la risoluzione algebrica: il valore di x non viene anticipato.</p>';} 
+const con=$('connections');if(state.hidden&&!state.solved)con.innerHTML='<p>Risolvi prima il termine incognito per visualizzare i collegamenti numerici.</p>';else if(!valid)con.innerHTML='<p class="bad">Inserisci denominatori non nulli per esplorare i collegamenti.</p>';else if(!isProp)con.innerHTML='<p class="bad">I rapporti non sono equivalenti. Correggi la proporzione per attivare i collegamenti.</p>';else{con.innerHTML=`<div class="grid"><div class="panel"><h3>Proporzione</h3><p class="formula">${displayTerm(a)} : ${displayTerm(b)} = ${displayTerm(c)} : ${displayTerm(d)}</p></div><div class="panel"><h3>Proporzionalità diretta</h3><p>Le coppie (x, y) = (${displayTerm(b)}, ${displayTerm(a)}) e (${displayTerm(d)}, ${displayTerm(c)}) soddisfano y = ${displayTerm(ratio)} · x.</p></div><div class="panel"><h3>Percentuale</h3><p>${displayTerm(a)} su ${displayTerm(b)} = ${fmt(ratio*100)}%.</p></div></div>`}
+if(isProp&&(!state.hidden||state.solved)){const fr=fraction(a,b);if(fr){$('kNum').value=fr[0];$('kDen').value=fr[1]}if(ratio>=0&&ratio<=1){$('percent').value=Math.round(ratio*100);$('percentSlider').value=Math.round(ratio*100);$('total').value=b}}renderGraph();renderPercent()}
+
+let propertySteps=[];let animationReveal=null,animationRunning=false,animationTimers=[],animationPhase=-1;
+function cancelPropertyAnimation(){animationTimers.forEach(clearTimeout);animationTimers=[];animationReveal=null;animationRunning=false;animationPhase=-1;}
+function playPropertyAnimation(){
+ cancelPropertyAnimation();
+ animationRunning=true;animationReveal=5;stepShown=1;
+ renderPropertyLab();
+ requestAnimationFrame(()=>requestAnimationFrame(()=>{
+  if(!animationRunning)return;
+  const root=document.getElementById('activePropertyFlow');if(!root)return;
+  const kind=propertySteps[propertySteps.length-1]?.kind||'';
+  const compound=/^(compose|decompose)/.test(kind);
+  const terms=[...root.querySelectorAll('[data-role="middle"] .term')];
+  const separators=[...root.querySelectorAll('[data-role="middle"] > span:not(.term)')];
+  const paths=[...root.querySelectorAll('.flow-arrows path[data-edge]')];
+  const heads=[...root.querySelectorAll('.flow-arrows path[data-head]')];
+  terms.forEach(el=>{el.style.visibility='hidden';el.style.opacity='0'});
+  separators.forEach(el=>{el.style.visibility=el.textContent.trim()==='='?'visible':'hidden'});
+  paths.forEach(p=>{p.style.visibility='hidden';p.style.animation='none';p.style.strokeDashoffset='';});
+  heads.forEach(h=>h.style.visibility='hidden');
+  // The compound properties have SIX distinct contributions, including the
+  // repeated source for the unchanged antecedent/consequent. Never group by source.
+  const groups=compound?[[0],[1],[4],[2],[3],[5]]:
+    kind==='invert'?[[0,1],[2,3]]:
+    kind==='middle'?[[1,2],[0,3]]:[[0,3],[1,2]];
+  const duration=compound?1100:1900,rest=compound?230:500;
+  const animateGroup=(group)=>{
+   if(!animationRunning)return;
+   const animations=[];
+   group.forEach(edge=>{
+    const p=paths.find(el=>Number(el.dataset.edge)===edge);if(!p)return;
+    p.style.visibility='visible';
+    const length=p.getTotalLength();
+    p.style.strokeDasharray=`${length} ${length}`;p.style.strokeDashoffset=String(length);
+    animations.push(p.animate([{strokeDashoffset:String(length)},{strokeDashoffset:'0'}],{duration,easing:'linear',fill:'forwards'}).finished.catch(()=>null));
+   });
+   Promise.all(animations).then(()=>{
+    if(!animationRunning)return;
+    group.forEach(edge=>{
+     const p=paths.find(el=>Number(el.dataset.edge)===edge);if(!p)return;
+     p.style.strokeDashoffset='0';
+     const head=heads.find(el=>Number(el.dataset.head)===edge);if(head)head.style.visibility='visible';
+     const dest=Number(p.dataset.to),term=terms[dest];
+     if(compound&&(dest===0||dest===2)){
+      const part=term?.querySelector(`[data-from="${p.dataset.from}"]`);
+      if(term){term.style.visibility='visible';term.style.opacity='1';
+       [...term.children].forEach(c=>{if(c.classList.contains('term-part')){if(c===part)c.style.visibility='visible'}else c.style.visibility='visible'});
+      }
+     }else if(term){term.style.visibility='visible';term.style.opacity='1'}
+     if(dest===0||dest===2){const colon=term?.nextElementSibling;if(colon&&colon.textContent.trim()===':')colon.style.visibility='visible'}
+    });
+   });
+  };
+  if(compound){
+   [0,2].forEach(i=>{const t=terms[i];if(t)t.querySelectorAll('.term-part').forEach(p=>p.style.visibility='hidden')});
+  }
+  groups.forEach((g,i)=>animationTimers.push(setTimeout(()=>animateGroup(g),150+i*(duration+rest))));
+  animationTimers.push(setTimeout(()=>{
+   if(!animationRunning)return;
+   terms.forEach(el=>{el.style.visibility='visible';el.style.opacity='1';el.querySelectorAll('.term-part').forEach(p=>p.style.visibility='visible')});
+   separators.forEach(el=>el.style.visibility='visible');
+   paths.forEach(p=>{p.style.visibility='visible';p.style.strokeDashoffset='0'});
+   heads.forEach(h=>h.style.visibility='visible');
+   root.classList.remove('is-animating');animationRunning=false;animationReveal=null;
+   $('stepPrev').disabled=false;$('stepNext').disabled=false;
+  },150+groups.length*(duration+rest)+120));
+ }));
+}
+
+let algebraTerms=null,algebraSolution=null;
+function parseAlgebraTerm(raw){
+ const t=String(raw).replace(/\s/g,'').replace(/−/g,'-').replace(/,/g,'.').replace(/^\((.*)\)$/,'$1');
+ if(!t)return null;
+ if(/^[+]?\d+(?:\.\d+)?$/.test(t))return {v:[Number(t),0],label:t.replace(/^\+/,'')};
+ if(/^-\d+(?:\.\d+)?$/.test(t))return {v:[Number(t),0],label:t};
+ if(t==='x'||t==='+x')return {v:[0,1],label:'(+x)'};
+ let m=t.match(/^\+?x([+-])(\d+(?:\.\d+)?)$/);
+ if(m){const n=Number(m[2])*(m[1]==='+'?1:-1);return {v:[n,1],label:`(+x${n>=0?'+':'−'}${Math.abs(n)})`}}
+ m=t.match(/^(\d+(?:\.\d+)?)\+x$/);
+ if(m)return {v:[Number(m[1]),1],label:`(${m[1]}+x)`};
+ m=t.match(/^(\d+(?:\.\d+)?)-x$/);
+ if(m)return {v:[Number(m[1]),-1],label:`(${m[1]}−x)`};
+ return null;
+}
+function algebraDisplay(v){
+ const [n,k]=v;
+ if(Math.abs(k)<1e-9)return negativeStandalone(n);
+ if(k===1)return n===0?'(+x)':`(+x${n>0?'+':'−'}${rationalHTML(String(Math.abs(n)))})`;
+ if(k===-1&&n>0)return `(${rationalHTML(String(n))}−x)`;
+ // Intermediate steps can have coefficients beyond ±1.
+ return `(${k>0?'+':''}${rationalHTML(String(k))}x${n>0?'+':''}${n?fractionExact(n):''})`;
+}
+
+function negativeStandalone(n){
+ const h=fractionExact(n);
+ return n<0?`<span class="neg-standalone">(${h})</span>`:h;
+}
+function approxFraction(n){
+ if(!Number.isFinite(n))return null;
+ const r=parseRat(String(Number(n.toFixed(8))));
+ return r||[Math.round(n*100000),100000];
+}
+function cancelGcd(a,b){return gcdExact(Math.round(Math.abs(a)),Math.round(Math.abs(b)))}
+function cancelFractionHtml(n,d){
+ if(d===0)return '';
+ const a=approxFraction(n),b=approxFraction(d);
+ if(!a||!b||!b[0])return '';
+ // n/d = (a0*b1)/(a1*b0); normalize the sign to the numerator.
+ let top=a[0]*b[1],bottom=a[1]*b[0];
+ if(bottom<0){top=-top;bottom=-bottom}
+ if(!Number.isSafeInteger(top)||!Number.isSafeInteger(bottom))return '';
+ const g=cancelGcd(top,bottom);
+ if(g<=1)return '';
+ const t=top/g,u=bottom/g;
+ const reduced=u===1?String(t):rationalHTML([t,u]);
+ return `<div class="step-panel"><h3>Semplificazione della frazione</h3>
+ <p class="note">Dividiamo numeratore e denominatore per ${g}.</p>
+ <div class="cancel-demo"><i>x</i> = <span class="cancel-frac" aria-label="Frazione ${top} su ${bottom} semplificata in ${t} su ${u}">
+ <span class="cpart numerator">${top}<span class="reduced">${t}</span></span>
+ <span class="cbar"></span>
+ <span class="cpart denom">${bottom}<span class="reduced">${u}</span></span>
+ </span><span>→</span><span><i>x</i> = ${reduced}</span></div></div>`;
+}
+function fractionDivisionStages(e){
+ const a=approxFraction(e.rhs),b=approxFraction(e.coef);
+ if(!a||!b||!b[0])return [];
+ const out=[];
+ const n=a[0],d=a[1],p=b[0],q=b[1];
+ const complex=d!==1||q!==1;
+ if(complex){
+  const dividend=negativeStandalone(e.rhs),divisor=negativeStandalone(e.coef);
+  out.push(`<div class="step-panel"><h3>Divisione tra frazioni</h3><p class="note">Dividere per una frazione significa moltiplicare per il suo reciproco.</p>
+  <div class="formula"><i>x</i> = ${dividend} · ${negativeStandalone(q/p)}</div>
+  <p class="note">Il reciproco di ${divisor} è ${negativeStandalone(q/p)}.</p></div>`);
+ }
+ const cancellation=cancelFractionHtml(e.rhs,e.coef);
+ if(cancellation)out.push(cancellation);
+ return out;
+}
+function makeVerificationStages(v){
+ const e=affineEquation(v);if(!e)return [];
+ const extreme=[v[0],v[3]],middle=[v[1],v[2]];
+ const hasX=pair=>pair.some(t=>Math.abs(t[1])>1e-9);
+ // Prefer the product containing x first, and always write the factor with x last.
+ const first=hasX(extreme)&&!hasX(middle)?extreme:middle;
+ const second=first===extreme?middle:extreme;
+ const term=t=>algebraDisplay(t);
+ const prod=pair=>{
+  const order=[...pair].sort((a,b)=>Math.abs(a[1])-Math.abs(b[1]));
+  return `${term(order[0])} · ${term(order[1])}`;
+ };
+ const cross=`<div class="step-panel fundamental-step"><h3>3. Proprietà fondamentale</h3><div class="formula">${prod(first)} = ${prod(second)}</div><p class="note">Prodotto degli estremi = prodotto dei medi</p></div>`;
+ const equation=`<div class="step-panel fundamental-step"><h3>4. Sviluppo e semplificazione</h3><p class="note">Raccogliamo i termini con x a sinistra:</p>${equationMarkup(e)}</div>`;
+ const isolation=`<div class="step-panel"><h3>Isolamento dell’incognita</h3><div class="formula"><i>x</i> = <span class="frac"><span>${fractionExact(e.rhs)}</span><span>${fractionExact(e.coef)}</span></span></div></div>`;
+ const extras=fractionDivisionStages(e);
+ const final=`<div class="step-panel"><h3>Risultato finale</h3><div class="formula"><strong>x = ${fractionExact(e.x)}</strong></div></div>`;
+ return [cross,equation,isolation,...extras,final];
+}
+
+function evaluateAlgebra(v,x){return v.map(t=>t[0]+t[1]*x)}
+function algebraValidate(v){
+ const e=affineEquation(v);
+ if(!e||!Number.isFinite(e.x))return {error:'La proporzione deve dare un’equazione di primo grado con soluzione unica (evita due x entrambe tra i medi o tra gli estremi).'};
+ const vals=evaluateAlgebra(v,e.x);
+ if(Math.abs(vals[1])<1e-8||Math.abs(vals[3])<1e-8)return {error:'La soluzione annulla un denominatore: proporzione non valida.'};
+ if(!validProp(vals))return {error:'La proporzione non risulta verificata.'};
+ return {solution:e.x,values:vals};
+}
+function activateAlgebra(raw){
+ const parsed=raw.map(parseAlgebraTerm);
+ if(parsed.some(v=>!v)){$('algebraFeedback').textContent='Termine non ammesso. Usa numeri, +x, +x+n, +x−n, n+x oppure n−x (senza −x isolato).';return}
+ const terms=parsed.map(p=>p.v),numX=terms.filter(t=>t[1]!==0).length;
+ if(numX!==2){$('algebraFeedback').textContent='Inserisci esattamente due termini contenenti x.';return}
+ const check=algebraValidate(terms);
+ if(check.error){$('algebraFeedback').textContent=check.error;return}
+ algebraTerms=terms;algebraSolution=check.solution;
+ resetPropertySteps();Object.assign(state,{a:check.values[0],b:check.values[1],c:check.values[2],d:check.values[3],hidden:null,solved:false});
+ $('answerWrap').hidden=true;$('checkAnswer').hidden=true;$('showSolution').hidden=true;
+ $('algebraFeedback').textContent=`Proporzione valida. Applica una proprietà per trovare x.`;
+ render();
+}
+function algebraVerificationStages(){
+ if(!propertySteps.length||!algebraTerms)return [];
+ let current=algebraTerms;
+ for(const step of propertySteps)current=affineTransform(current,step.kind);
+ return makeVerificationStages(current);
+}
+$('generateAlgebra').onclick=()=>{
+ const selected=[...document.querySelectorAll('#algebraPositions input:checked')].map(el=>Number(el.value));
+ if(selected.length!==2){$('algebraFeedback').textContent='Seleziona esattamente due posizioni.';return}if((selected[0]===0&&selected[1]===3)||(selected[0]===1&&selected[1]===2)){$('algebraFeedback').textContent='Scegli due posizioni che non siano entrambe gli estremi o entrambe i medi: queste combinazioni possono produrre equazioni di secondo grado.';return}
+ // Build a guaranteed valid example by assigning affine terms in two chosen positions,
+ // then deriving one numeric term from the equality at an integer x.
+ for(let trial=0;trial<150;trial++){
+  const x=randomInt(2,9),offset=randomInt(1,5),sign=Math.random()<.5?1:-1;
+  const terms=Array.from({length:4},()=>[randomInt(2,9),0]);
+  const first=selected[0],second=selected[1];
+  terms[first]=[offset,sign];terms[second]=[0,1];
+  const v=evaluateAlgebra(terms,x);
+  const missing=[0,1,2,3].filter(i=>!selected.includes(i));
+  const fix=missing[1];
+  const other=missing[0];
+  // Fix one numeric term to satisfy a*d=b*c at chosen x.
+  const numerator=fix===0?v[1]*v[2]:fix===1?v[0]*v[3]:fix===2?v[0]*v[3]:v[1]*v[2];
+  const denominator=fix===0?v[3]:fix===1?v[2]:fix===2?v[1]:v[0];
+  if(Math.abs(denominator)<1e-8)continue;
+  terms[fix]=[numerator/denominator,0];
+  if(!Number.isFinite(terms[fix][0])||Math.abs(terms[fix][0])>200)continue;
+  const check=algebraValidate(terms);
+  if(check.error||!eq(check.solution,x))continue;
+  const raw=terms.map((t,i)=>i===first?(sign===1?`+x+${offset}`:`${offset}-x`):i===second?'+x':String(Number(t[0].toFixed(5))));
+  raw.forEach((v,i)=>$('alg'+i).value=v);
+  activateAlgebra(raw);return;
+ }
+ $('algebraFeedback').textContent='Non è stato possibile generare un esempio: riprova.';
+};
+$('applyAlgebra').onclick=()=>activateAlgebra([0,1,2,3].map(i=>$('alg'+i).value));
+$('exitAlgebra').onclick=()=>{algebraTerms=null;algebraSolution=null;resetPropertySteps();$('algebraFeedback').textContent='Modalità numerica ripristinata.';render()};
+
+const ratioKeys=['a','b','c','d'];
+function ratioSnapshot(){return ratioKeys.map(k=>state[k])}
+function validProp(v){return v.every(Number.isFinite)&&v[1]!==0&&v[3]!==0&&eq(v[0]*v[3],v[1]*v[2])}
+function transformRatio(v,kind){const [a,b,c,d]=v;switch(kind){
+case 'invert':return [b,a,d,c];case 'middle':return [a,c,b,d];case 'extreme':return [d,b,c,a];
+case 'composeB':return [a+b,b,c+d,d];case 'composeA':return [a+b,a,c+d,c];
+case 'decomposeB':return [a-b,b,c-d,d];case 'decomposeA':return [a-b,a,c-d,c];}}
+function ratioText(v){return v.map((n,i)=>`${rationalText(String(n))}${i===0||i===2?' : ':i===1?' = ':''}`).join('')}
+let stepShown=0;
+function formulaParts(v){return v.map((n,i)=>rationalHTML(String(n)))}
+function stripTerm(t){const e=document.createElement('div');e.innerHTML=t;return e.textContent.trim()}
+function propertyArrowSVG(tokens,kind){
+ const dest=kind==='invert'?[1,0,3,2]:kind==='middle'?[0,2,1,3]:kind==='extreme'?[3,1,2,0]:null;
+ const edges=dest?dest.map((source,target)=>[source,target]):
+ [[0,0],[1,0],[2,2],[3,2],[kind.endsWith('B')?1:0,1],[kind.endsWith('B')?3:2,3]];
+ const xs=[43,115,223,302], colors=['#2374bc','#e18c2b','#2374bc','#e18c2b'];
+ const labels=tokens.map(stripTerm);
+ const esc=x=>String(x).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+ return `<svg class="property-arrows" viewBox="0 0 350 140" role="img" aria-label="Frecce che collegano i termini iniziali alle posizioni trasformate">
+ <defs><marker id="arrowHeadLab" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#66768c" stroke-width="1.2"/></marker></defs>
+ ${labels.map((t,i)=>`<text x="${xs[i]}" y="19" text-anchor="middle" font-size="15" fill="${colors[i]}">${esc(t)}</text>`).join('')}
+ ${edges.map(([from,to],i)=>{let sx=xs[from],ex=xs[to],offset=(i%2?6:-6);return `<path d="M${sx+offset} 29 Q${(sx+ex)/2+offset} ${50+(i%3)*11} ${ex+offset} 110" fill="none" stroke="${colors[from]}" stroke-width="2" marker-end="url(#arrowHeadLab)"/>`}).join('')}
+ ${[0,1,2,3].map(i=>`<text x="${xs[i]}" y="134" text-anchor="middle" font-size="12" fill="currentColor">${['1°','2°','3°','4°'][i]} termine</text>`).join('')}
+ </svg>`;
+}
+function simplifyPropertyTokens(intermediate,kind,masked,values,dependencies){
+ if(!masked)return formulaParts(values);
+ return intermediate.map((token,i)=>{
+  if(!dependencies[i])return rationalHTML(String(values[i]));
+  const plain=stripTerm(token);
+  const m=plain.match(/^\(([-+]?\d+(?:\/\d+)?)\s*([+−])\s*([-+]?\d+(?:\/\d+)?)\)$/);
+  if(m){const aa=parseRat(m[1]),bb=parseRat(m[3]);if(aa&&bb){const v=(aa[0]/aa[1])+(m[2]==='+'?1:-1)*(bb[0]/bb[1]);return rationalHTML(String(v));}}
+  return token;
+ });
+}
+function propertyDependencies(previous,kind){const [a,b,c,d]=previous;switch(kind){
+ case 'invert':return [b,a,d,c];case 'middle':return [a,c,b,d];case 'extreme':return [d,b,c,a];
+ case 'composeB':return [a||b,b,c||d,d];case 'composeA':return [a||b,a,c||d,c];
+ case 'decomposeB':return [a||b,b,c||d,d];case 'decomposeA':return [a||b,a,c||d,c];
+ }}
+let selectedPropertySource=null;
+function flowTerm(content,idx,compound,kind){
+ const op=kind.startsWith('compose')?'+':'−';
+ if(compound&&(idx===0||idx===2)){
+  const first=idx===0?0:2,second=first+1;
+  return `<span class="term" data-dest="${idx}"><span>(</span><span class="term-part" data-from="${first}">${displayRatioTerm(content[first])}</span><span>${op}</span><span class="term-part" data-from="${second}">${displayRatioTerm(content[second])}</span><span>)</span></span>`;
+ }
+ let source=compound?(idx===1?(kind.endsWith('B')?1:0):(kind.endsWith('B')?3:2)):null;
+ return `<span class="term" data-dest="${idx}" ${source!==null?`data-from="${source}"`:''}>${displayRatioTerm(compound?content[source]:content[idx])}</span>`;
+}
+function flowFormula(parts,role,kind){
+ const compound=role==='middle'&&(kind.startsWith('compose')||kind.startsWith('decompose'));
+ return `<div class="flow-formula" data-role="${role}">${parts.map((part,i)=>`${flowTerm(compound?parts:parts,i,compound,kind)}${i===0||i===2?'<span>:</span>':i===1?'<span>=</span>':''}`).join('')}</div>`;
+}
+function propertyFlowHTML(last,stepsVisible){
+ const kind=last.kind,combine=/^(compose|decompose)/.test(kind),all=last.explanation;
+ const showMiddle=stepsVisible>=2;
+ const showFinal=stepsVisible>=3;
+ let html=`<div class="step-panel property-flow ${animationRunning?'is-animating':''}" id="activePropertyFlow" data-reveal="${animationReveal===null?(stepsVisible>=2?5:1):animationReveal}"><div class="flow-heading">1. Proporzione iniziale</div>${flowFormula(last.sourceTokens,'source',kind)}`;
+ if(showMiddle){html+=`<div class="flow-gap"></div><div class="flow-heading">${combine?'2. Passaggio intermedio':'2. Proporzione <span class="second-line">trasformata</span>'}</div>${flowFormula(combine?last.sourceTokens:last.middleTokens,'middle',kind)}`;}
+ if(combine&&showFinal){const different=last.middleTokens.some((t,i)=>stripTerm(t)!==stripTerm(last.finalTokens[i]));if(different)html+=`<div class="flow-final"><div class="flow-heading">3. Risultato semplificato</div>${flowFormula(last.finalTokens,'final',kind)}</div>`;else html+=`<p class="flow-caption">La forma intermedia è già semplificata: non occorre ripeterla.</p>`;}
+ html+=`<svg class="flow-arrows" aria-label="Frecce tra i termini delle due proporzioni"></svg><p class="flow-caption">Un clic su Successivo avvia la scrittura animata della proporzione.</p></div>`;
+ return html;
+}
+function drawPropertyFlow(){
+ const root=document.getElementById('activePropertyFlow');if(!root)return;
+ const svg=root.querySelector('.flow-arrows'),source=root.querySelector('[data-role="source"]'),target=root.querySelector('[data-role="middle"]');if(!source||!target)return;
+ // Align columns by term center; keep punctuation compact and consistent.
+ const rows=[source,target];
+ rows.forEach(r=>{r.style.display='flex';r.style.gridTemplateColumns='';r.style.width='max-content';});
+ const columns=rows.map(r=>[...r.children]);
+ const widths=Array.from({length:7},(_,i)=>Math.ceil(Math.max(...columns.map(c=>c[i]?.getBoundingClientRect().width||0)))+(i%2===0?2:0));
+ const template=widths.map(w=>`${w}px`).join(' ');
+ rows.forEach(r=>{r.style.display='grid';r.style.gridTemplateColumns=template;r.style.width='max-content';r.style.justifyContent='initial';r.style.columnGap='0';r.style.marginInline='auto';});
+ const rootRect=root.getBoundingClientRect();const width=root.scrollWidth,height=root.scrollHeight;
+ svg.setAttribute('viewBox',`0 0 ${width} ${height}`);svg.setAttribute('width',width);svg.setAttribute('height',height);
+ const reveal=$('stepsMode').value==='all'?5:Number(root.dataset.reveal||5);
+ const visibleTerms=Math.max(0,Math.min(4,reveal-1));
+ [...target.children].forEach((node,i)=>{
+  const dest=Math.floor(i/2);
+  const shown=dest<visibleTerms;
+  node.style.visibility=animationRunning?'hidden':(shown?'visible':'hidden');
+  node.classList.remove('just-written');
+ });
+ const last=propertySteps[propertySteps.length-1],kind=last.kind,combine=/^(compose|decompose)/.test(kind);
+ const mapping=combine?[[0,0],[1,0],[2,2],[3,2],[kind.endsWith('B')?1:0,1],[kind.endsWith('B')?3:2,3]]:kind==='invert'?[[0,1],[1,0],[2,3],[3,2]]:kind==='middle'?[[0,0],[1,2],[2,1],[3,3]]:[[0,3],[1,1],[2,2],[3,0]];
+ const colors=['#111111','#111111','#111111','#111111'];
+ const patterns=['','','',''];
+ const sourceEls=[...source.querySelectorAll('.term')];const targetEls=[...target.querySelectorAll('.term')];
+ const targetPart=(from,to)=>{const el=targetEls[to];if(!combine)return el;if(to===0||to===2)return el.querySelector(`[data-from="${from}"]`)||el;return el;};
+ let paths=[];
+ for(let i=0;i<mapping.length;i++){
+  const [from,to]=mapping[i],s=sourceEls[from],d=targetPart(from,to);if(!s||!d||to>=visibleTerms)continue;
+  const sr=s.getBoundingClientRect(),dr=d.getBoundingClientRect();const x1=sr.left+sr.width/2-rootRect.left+root.scrollLeft,y1=sr.bottom-rootRect.top+4;
+  const x2=dr.left+dr.width/2-rootRect.left+root.scrollLeft,y2=dr.top-rootRect.top-5;
+  const bend=Math.max(18,(y2-y1)*.48);
+  const pathData=Math.abs(x1-x2)<1?`M${x1} ${y1} L${x2} ${y2}`:`M${x1} ${y1} C${x1} ${y1+bend},${x2} ${y2-bend},${x2} ${y2}`;
+  const cls=selectedPropertySource===null?'':selectedPropertySource===from?'emphasis':'dimmed';
+  const fresh=false;
+  // Draw a slim open V as separate strokes, not a filled SVG marker.
+  const angle=Math.atan2(y2-(Math.abs(x1-x2)<1?y1:y2-bend),x2-(Math.abs(x1-x2)<1?x1:x2));
+  const len=8,spread=.48;
+  const h1x=x2-len*Math.cos(angle-spread),h1y=y2-len*Math.sin(angle-spread);
+  const h2x=x2-len*Math.cos(angle+spread),h2y=y2-len*Math.sin(angle+spread);
+  paths.push(`<path data-edge="${i}" data-from="${from}" data-to="${to}" class="${cls}" d="${pathData}" stroke="${colors[from]}"/><path data-head="${i}" class="arrow-open-head ${cls}" d="M${h1x} ${h1y} L${x2} ${y2} L${h2x} ${h2y}" stroke="#111"/>`);
+ }
+ svg.innerHTML=paths.join('');
+ root.onclick=e=>{if(!e.target.closest('[data-role="source"] .term')){selectedPropertySource=null;drawPropertyFlow()}};
+ sourceEls.forEach((el,i)=>{el.classList.toggle('selected',selectedPropertySource===i);el.tabIndex=0;el.setAttribute('role','button');el.setAttribute('aria-label',`Evidenzia le frecce del termine ${i+1}`);el.onclick=e=>{e.stopPropagation();selectedPropertySource=selectedPropertySource===i?null:i;drawPropertyFlow()};el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();el.click()}}});
+}
+// Verifica algebrica: ogni termine e' una funzione affine dell'incognita.
+function affineTransform(v,kind){const plus=(a,b,sign=1)=>[a[0]+sign*b[0],a[1]+sign*b[1]];const [a,b,c,d]=v;switch(kind){case 'invert':return [b,a,d,c];case 'middle':return [a,c,b,d];case 'extreme':return [d,b,c,a];case 'composeB':return [plus(a,b),b,plus(c,d),d];case 'composeA':return [plus(a,b),a,plus(c,d),c];case 'decomposeB':return [plus(a,b,-1),b,plus(c,d,-1),d];case 'decomposeA':return [plus(a,b,-1),a,plus(c,d,-1),c];}return v;}
+function affineEquation(v){const mul=(a,b)=>[a[0]*b[0],a[0]*b[1]+a[1]*b[0],a[1]*b[1]];const ext=mul(v[0],v[3]),med=mul(v[1],v[2]);const delta=[ext[0]-med[0],ext[1]-med[1],ext[2]-med[2]];if(Math.abs(delta[2])>1e-7)return null;let coef=delta[1],rhs=-delta[0];if(coef<0){coef=-coef;rhs=-rhs}if(Math.abs(coef)<1e-9)return null;return {coef,rhs,x:rhs/coef,ext,med};}
+function fractionExact(v){if(!Number.isFinite(v))return '—';if(Math.abs(v)<1e-10)return '0';const sign=v<0?-1:1;v=Math.abs(v);for(let den=1;den<=100000;den++){let num=Math.round(v*den);if(Math.abs(num/den-v)<1e-9)return rationalHTML([sign*num,den]);}return fmt(sign*v);}
+function equationMarkup(e){return `<div class="formula">${fractionExact(e.coef)}<i>x</i> = ${fractionExact(e.rhs)}</div>`;}
+function fundamentalBlock(title,v,original){const e=affineEquation(v);if(!e)return `<div class="step-panel"><h3>${title}</h3><p>La trasformazione richiede una semplificazione algebrica ulteriore.</p></div>`;
+ const xAt=v.map(t=>Math.abs(t[1])>1e-9),onExtreme=(xAt[0]||xAt[3])&&!(xAt[1]||xAt[2]),onMiddle=(xAt[1]||xAt[2])&&!(xAt[0]||xAt[3]);
+ const l=onExtreme?'Prodotto degli estremi':onMiddle?'Prodotto dei medi':'Prodotti raccolti con x';const r=onExtreme?'Prodotto dei medi':onMiddle?'Prodotto degli estremi':'Termini numerici raccolti';
+ const compound=propertySteps.length&&/^(compose|decompose)/.test(propertySteps[propertySteps.length-1].kind)&&!original;
+ const isX=t=>Math.abs(t[1])>1e-9;
+ const termStr=t=>{const [n,k]=t;if(!isX(t))return fractionExact(n);const sign=k===1?'':k===-1?'−':fractionExact(k);const base=`${sign}<i>x</i>`;return n===0?base:`(${base} ${n>0?'+':'−'} ${fractionExact(Math.abs(n))})`;};
+ const productStr=(a,b)=>{const ta=termStr(a),tb=termStr(b);return `${ta} · ${tb}`;};
+ const cross=compound?`<div class="fundamental-cross"><div class="formula">${productStr(v[0],v[3])} = ${productStr(v[1],v[2])}</div><p class="note">Prodotto degli estremi = prodotto dei medi</p><p class="note">Sviluppando e raccogliendo i termini:</p></div>`:'';
+ return `<div class="step-panel fundamental-step"><h3>Proprietà fondamentale</h3>${cross}${equationMarkup(e)}<svg viewBox="0 0 420 105" class="fundamental-arrows" role="img" aria-label="Spiegazione dei due membri dell’equazione"><defs><marker id="fundHead" markerWidth="9" markerHeight="9" refX="6" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6 Z" fill="#2775bd"/></marker></defs><path d="M158 4 L95 49" stroke="#2775bd" stroke-width="2.3" fill="none" marker-end="url(#fundHead)"/><path d="M262 4 L325 49" stroke="#2775bd" stroke-width="2.3" fill="none" marker-end="url(#fundHead)"/><text x="92" y="77" text-anchor="middle" font-size="14" fill="currentColor">${l}</text><text x="327" y="77" text-anchor="middle" font-size="14" fill="currentColor">${r}</text></svg></div>`;
+}
+function verificationStages(){
+ if(!state.hidden||state.solved||!propertySteps.length)return [];
+ let current=ratioKeys.map(k=>[k===state.hidden?0:state[k],k===state.hidden?1:0]);
+ for(const step of propertySteps)current=affineTransform(current,step.kind);
+ return makeVerificationStages(current);
+}
+function fractionNumerator(n){return fractionExact(n);}
+function alignFundamentalPairs(){
+ const side=document.querySelector('.property-paired .verification-side');
+ if(!side)return;
+ side.style.height='auto';side.style.display='flex';side.style.flexDirection='column';side.style.gap='12px';
+ side.querySelectorAll('.verification-pair').forEach(card=>{
+  card.style.position='static';card.style.top='auto';card.style.left='auto';card.style.right='auto';card.style.width='100%';card.style.flex='0 0 auto';
+ });
+}
+function renderPropertyLab(){const base=ratioSnapshot();let masked=state.hidden&&!state.solved;
+let tokens=propertySteps.length?propertySteps[propertySteps.length-1].tokens:algebraTerms?algebraTerms.map(algebraDisplay):ratioKeys.map(k=>masked&&k===state.hidden?'x':rationalHTML(String(state[k])));
+$('propertyFormula').innerHTML=propertySteps.length?'':ratioMarkup(tokens);$('propertyHistory').innerHTML=propertySteps.map((st,i)=>`<div class="history-line">${i+1}. ${st.label}: ${ratioMarkup(st.tokens)}</div>`).join('');
+$('undoProperty').disabled=!propertySteps.length;$('resetProperties').disabled=!propertySteps.length;
+let last=propertySteps[propertySteps.length-1],details=$('propertyDetails');$('stepPrev').hidden=$('stepNext').hidden=$('stepsMode').value!=='guided'||!last;
+if(!last){details.innerHTML='';return}
+const baseCount=3;const checks=algebraTerms?algebraVerificationStages():verificationStages();const count=baseCount+Math.max(0,checks.length-1);
+stepShown=Math.min(stepShown,count-1);
+const visible=$('stepsMode').value==='guided'?stepShown+1:count;
+const shownChecks=Math.max(0,visible-baseCount);
+const actualShownChecks=shownChecks?Math.min(checks.length,shownChecks+1):0;
+const pairedChecks=checks.slice(0,Math.min(2,actualShownChecks));
+details.innerHTML=`<div class="property-paired">${propertyFlowHTML(last,Math.min(visible,baseCount))}<div class="verification-side">${pairedChecks.map((c,i)=>`<div class="verification-pair" data-pair="${i}">${c}</div>`).join('')}</div></div>`+(actualShownChecks>2?`<div class="verification-final-row">${checks.slice(2,actualShownChecks).join('')}</div>`:'');
+$('stepPrev').disabled=animationRunning||stepShown===0;$('stepNext').disabled=animationRunning||stepShown>=count-1;
+requestAnimationFrame(()=>{drawPropertyFlow();alignFundamentalPairs();});
+if(!validProp(base)){$('propertyMessage').textContent='Per applicare le proprietà occorre una proporzione valida con denominatori non nulli.';}else if(!$('propertyMessage').dataset.manual){$('propertyMessage').textContent='Seleziona una proprietà e osserva la trasformazione.';}}
+window.addEventListener('resize',()=>requestAnimationFrame(()=>{drawPropertyFlow();alignFundamentalPairs()}));
+function resetPropertySteps(){cancelPropertyAnimation();propertySteps=[];stepShown=0;selectedPropertySource=null;$('propertyMessage').dataset.manual='';}
+function hideRatioTerm(key){if(!ratioKeys.includes(key))return;algebraTerms=null;algebraSolution=null;state.hidden=key;state.solved=false;resetPropertySteps();$('answerWrap').hidden=false;$('checkAnswer').hidden=false;$('showSolution').hidden=$('mode').value==='test';$('answerResult').textContent=`Calcola il termine ${key}.`;$('answer').value='';render()}
+function transformTokens(t,kind){let [a,b,c,d]=t;switch(kind){case 'invert':return [b,a,d,c];case 'middle':return [a,c,b,d];case 'extreme':return [d,b,c,a];case 'composeB':return [`(${a} + ${b})`,b,`(${c} + ${d})`,d];case 'composeA':return [`(${a} + ${b})`,a,`(${c} + ${d})`,c];case 'decomposeB':return [`(${a} − ${b})`,b,`(${c} − ${d})`,d];case 'decomposeA':return [`(${a} − ${b})`,a,`(${c} − ${d})`,c]}}
+function randomInt(min,max){return min+Math.floor(Math.random()*(max-min+1))}
+function generateRatio(){
+ const type=$('genType').value;
+ if(type==='two'||(type==='mixed'&&Math.random()<.5)){
+  const pos=$('genPosition').value;
+  const pair=pos.startsWith('pair')?pos.slice(4).split('').map(Number):
+   pos==='extreme'?[0,3]:pos==='middle'?[1,2]:
+   [[0,1],[0,2],[0,3],[1,2],[1,3],[2,3]][randomInt(0,5)];
+  document.querySelectorAll('#algebraPositions input').forEach(el=>el.checked=pair.includes(Number(el.value)));
+  $('algebraBuilder').scrollIntoView({block:'nearest',behavior:'smooth'});
+  $('generateAlgebra').click();
+  return;
+ }
+ algebraTerms=null;algebraSolution=null;
+ const lev=Number($('level').value);let a,b,c,d;
+ // Create four valid terms first; then select exactly one unknown.
+ const multiplier=randomInt(2,6);
+ if(lev===1){a=randomInt(1,12);b=randomInt(1,12);c=a*multiplier;d=b*multiplier;}
+ else if(lev===2){const den=randomInt(2,6);a=randomInt(1,12)/den;b=randomInt(1,10);c=a*multiplier;d=b*multiplier;}
+ else{const den=randomInt(2,8);a=(randomInt(1,15)*(Math.random()<.5?-1:1))/den;b=randomInt(1,12)/randomInt(2,7);c=a*multiplier;d=b*multiplier;}
+ if(!validProp([a,b,c,d])){ $('answerResult').textContent='Errore di generazione: riprova.';return;}
+ Object.assign(state,{a,b,c,d,hidden:null,solved:false});
+ resetPropertySteps();$('answerWrap').hidden=true;$('checkAnswer').hidden=true;$('showSolution').hidden=true;$('answerResult').textContent='';
+ const unknown=type==='unknown'||(type==='mixed'&&Math.random()<.5);
+ if(unknown){const pos=$('genPosition').value,pool=pos==='extreme'?['a','d']:pos==='middle'?['b','c']:pos.startsWith('pair')?pos.slice(4).split('').map(i=>ratioKeys[Number(i)]):ratioKeys;hideRatioTerm(pool[randomInt(0,pool.length-1)]);}
+ else render();
+}
+function renderPercent(){const p=Number($('percent').value),t=Number($('total').value),safe=Math.max(0,Math.min(100,p));$('percentSlider').value=safe;document.querySelectorAll('.pct-linked').forEach(el=>el.value=safe);document.querySelectorAll('.pct-output').forEach(el=>el.textContent=fmt(safe)+'%');$('pctThermoFill').style.height=safe+'%';$('pctThermo').setAttribute('aria-label',`Termometro: ${fmt(safe)} per cento`);$('percentFormula').textContent=`${fmt(p)}% di ${fmt(t)} = ${fmt(t*p/100)}`;$('hundred').innerHTML=Array.from({length:100},(_,i)=>`<div class="cell ${i<Math.round(safe)?'filled':''}"></div>`).join('');const blue='#3286d2',gray='#e0e7f0',remaining=100-safe;const legend=`<span><i class="pct-key" style="background:${blue}"></i>Parte: ${fmt(safe)}% (${fmt(t*safe/100)})</span><span><i class="pct-key" style="background:${gray};border:1px solid #b5c4d5"></i>Resto: ${fmt(remaining)}% (${fmt(t*remaining/100)})</span>`;$('pctFill').style.width=safe+'%';$('pctBar').setAttribute('aria-label',`Parte ${fmt(safe)} per cento; resto ${fmt(remaining)} per cento`);$('pctBarLegend').innerHTML=legend;$('pctPie').style.background=`conic-gradient(${blue} 0% ${safe}%, ${gray} ${safe}% 100%)`;$('pctPie').setAttribute('aria-label',`Grafico a torta: parte ${fmt(safe)} per cento, resto ${fmt(remaining)} per cento`);$('pctPieLabel').textContent=fmt(safe)+'%';$('pctPieLegend').innerHTML=legend;$('pctChartNote').textContent=(p<0||p>100)?'I grafici rappresentano percentuali da 0% a 100%; il calcolo algebrico mantiene il valore inserito.':'';const price=Number($('price').value),change=Number($('change').value);$('priceResult').textContent=`Prezzo finale: ${fmt(price*(1+change/100))} € (${change>=0?'aumento':'sconto'} di ${fmt(Math.abs(change))}%).`}
+
+const gcd=(a,b)=>{a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b]}return a||1};
+function fraction(n,d=1){if(!Number.isFinite(n)||!Number.isFinite(d)||d===0)return null; if(!Number.isInteger(n)||!Number.isInteger(d)){const scale=1000000;n=Math.round(n*scale);d=Math.round(d*scale)}if(d<0){n=-n;d=-d}const g=gcd(n,d);return [n/g,d/g]}
+const fractionHTML=(n,d=1)=>{const f=fraction(n,d);if(!f)return '—';return f[1]===1?String(f[0]):`<span class="frac"><span>${f[0]}</span><span>${f[1]}</span></span>`};
+const readX=s=>{s=String(s).trim().replace(',','.');const m=s.match(/^(-?\d+(?:\.\d+)?)\s*\/\s*(-?\d+(?:\.\d+)?)$/);return m?Number(m[1])/Number(m[2]):Number(s)};
+let tableColumns=[{source:'x',value:'1'},{source:'x',value:'2'},{source:'x',value:'3'},{source:'x',value:'4'},{source:'x',value:'5'}];
+function calcColumn(col,kn,kd,inverse){
+ const source=col.source, raw=col.value.trim();
+ if(!source||raw==='')return {x:'',y:'',active:null};
+ const n=readX(raw);if(!Number.isFinite(n)||kd===0)return {x:source==='x'?raw:'',y:source==='y'?raw:'',active:source,error:'Valore non valido'};
+ if(inverse&&(n===0||kn===0))return {x:source==='x'?raw:'',y:source==='y'?raw:'',active:source,error:'Nella proporzionalità inversa x, y e k devono essere diversi da zero'};
+ if(!inverse&&kn===0&&source==='y'&&n!==0)return {x:'',y:raw,active:source,error:'Impossibile: con k = 0, y deve essere 0'};
+ if(!inverse&&kn===0&&source==='y')return {x:'',y:raw,active:source,error:'x indeterminata per k = 0 e y = 0'};
+ const f=fraction(n),fk=fraction(kn,kd);if(!f||!fk)return {x:'',y:'',active:source,error:'Valore non valido'};
+ let result;
+ if(source==='x')result=inverse?fraction(fk[0]*f[1],fk[1]*f[0]):fraction(fk[0]*f[0],fk[1]*f[1]);
+ else result=inverse?fraction(fk[0]*f[1],fk[1]*f[0]):fraction(f[0]*fk[1],f[1]*fk[0]);
+ if(!result)return {x:'',y:'',active:source,error:'Calcolo non definito'};
+ const out=result[1]===1?String(result[0]):result.join('/');
+ return {x:source==='x'?raw:out,y:source==='y'?raw:out,active:source};
+}
+function renderValues(kn,kd,inverse){
+ const computed=tableColumns.map(col=>calcColumn(col,kn,kd,inverse));
+ const cell=(row,col,i)=>{const active=col.active===row,value=col[row];return `<td><input class="xval ${active?'entered':value?'computed':''}" data-row="${row}" data-idx="${i}" value="${String(value).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')}" ${value&&!active?'disabled':''} aria-label="${row} colonna ${i+1}"></td>`};
+ $('values').innerHTML='<tr><th>x</th>'+computed.map((c,i)=>cell('x',c,i)).join('')+'</tr><tr><th>y</th>'+computed.map((c,i)=>cell('y',c,i)).join('')+'</tr>';
+ document.querySelectorAll('#values .xval').forEach(inp=>inp.addEventListener('change',()=>{const i=Number(inp.dataset.idx),row=inp.dataset.row;tableColumns[i]={source:inp.value.trim()?row:null,value:inp.value};renderGraph()}));
+}
+function renderGraph(){const canvas=$('graph'),ctx=canvas.getContext('2d'),w=canvas.width,h=canvas.height,kn=Number($('kNum').value),kd=Number($('kDen').value),k=kn/kd,inverse=$('kind').value==='inverse';$('kError').textContent=kd===0?'Il denominatore deve essere diverso da zero.':'';if(!Number.isFinite(k))return;ctx.clearRect(0,0,w,h);const X=x=>60+x*45,Y=y=>h-45-y*24;ctx.strokeStyle='#e2e8f0';ctx.lineWidth=1;for(let x=0;x<=12;x++){ctx.beginPath();ctx.moveTo(X(x),15);ctx.lineTo(X(x),h-45);ctx.stroke()}for(let y=0;y<=12;y++){ctx.beginPath();ctx.moveTo(60,Y(y));ctx.lineTo(w-10,Y(y));ctx.stroke()}ctx.strokeStyle='#33465c';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(60,10);ctx.lineTo(60,h-45);ctx.lineTo(w-10,h-45);ctx.stroke();ctx.fillStyle='#33465c';ctx.font='15px system-ui';ctx.fillText('y',43,20);ctx.fillText('x',w-18,h-27);ctx.strokeStyle='#2379c9';ctx.lineWidth=3;ctx.beginPath();let started=false;for(let x=inverse?.12:0;x<=12;x+=.025){const y=inverse?k/x:k*x;if(!Number.isFinite(y)||y<0||y>13){started=false;continue}if(!started){ctx.moveTo(X(x),Y(y));started=true}else ctx.lineTo(X(x),Y(y))}ctx.stroke();$('equation').innerHTML=inverse?`y = ${fractionHTML(kn,kd)} / x`:`y = ${fractionHTML(kn,kd)} · x`;
+$('relationInfo').textContent=inverse?'Per x ≠ 0 il prodotto x · y resta costante.':'Il rapporto y / x è costante per x ≠ 0; il grafico passa per l’origine.';
+renderValues(kn,kd,inverse);
+}
+function setPage(page){state.page=page;document.querySelectorAll('main section[id]').forEach(el=>{if(el.id!=='exercise')el.hidden=el.id!==page});document.querySelectorAll('#nav button').forEach(el=>el.classList.toggle('active',el.dataset.page===page));updateMode();render()}function updateMode(){const practice=$('mode').value!=='explore';$('exercise').hidden=!practice;document.querySelectorAll('main section[id]').forEach(el=>{if(el.id!=='exercise')el.hidden=practice||el.id!==state.page});if(practice&&!state.question)newQuestion();$('hideTerm').disabled=practice}function updateView(){const v=$('view').value;document.querySelectorAll('.algebra').forEach(el=>el.hidden=v==='visual');document.querySelectorAll('.visual').forEach(el=>el.hidden=v==='algebra')}
+function newQuestion(){const level=Number($('level').value),type=state.page==='percentuali'?'percent':state.page==='proporzionalita'?'proportional':'ratio';let answer,text;if(type==='ratio'){const a=1+Math.floor(Math.random()*8*level),b=1+Math.floor(Math.random()*8*level),m=1+Math.floor(Math.random()*5*level);answer=a*m;text=`Completa: ${a} : ${b} = x : ${b*m}. Quanto vale x?`}else if(type==='percent'){const p=10*(1+Math.floor(Math.random()*Math.min(9,level*3))),t=20*(1+Math.floor(Math.random()*10*level));answer=p*t/100;text=`Calcola il ${p}% di ${t}.`}else{const k=1+Math.floor(Math.random()*5*level),x=1+Math.floor(Math.random()*8*level);answer=k*x;text=`Nella proporzionalità diretta y = ${k}x, quanto vale y per x = ${x}?`}state.question={answer};$('question').textContent=text;$('exerciseAnswer').value='';$('feedback').textContent='';$('exerciseTitle').textContent=$('mode').value==='test'?'Verifica':'Esercitazione guidata';$('score').textContent=`Risposte corrette: ${state.correct} / ${state.attempts}`}
+for(const key of ['a','b','c','d']){const label=document.createElement('label');label.textContent=key+' ';const inp=document.createElement('input');inp.type='text';inp.inputMode='decimal';inp.className='num';inp.id=key;inp.value=state[key];inp.addEventListener('input',syncRatio);label.append(inp);$('ratioInputs').append(label)}document.querySelectorAll('[data-page]').forEach(b=>b.onclick=()=>setPage(b.dataset.page));document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>setPage(b.dataset.go));$('view').onchange=updateView;$('mode').onchange=()=>{state.question=null;updateMode()};$('level').onchange=()=>{state.question=null;if($('mode').value!=='explore')newQuestion()};$('clearValues').onclick=()=>{tableColumns=Array.from({length:5},()=>({source:null,value:''}));renderGraph()};$('kind').onchange=renderGraph;$('kNum').oninput=renderGraph;$('kDen').oninput=renderGraph;for(const id of ['percent','total','price','change'])$(id).oninput=()=>{if(id==='percent')$('percentSlider').value=$('percent').value;renderPercent()};$('percentSlider').oninput=()=>{$('percent').value=$('percentSlider').value;renderPercent()};document.querySelectorAll('.pct-linked').forEach(el=>el.addEventListener('input',()=>{$('percent').value=el.value;renderPercent()}));$('hideTerm').onclick=()=>hideRatioTerm(ratioKeys[randomInt(0,3)]);$('checkAnswer').onclick=()=>{if(!state.hidden)return;let answer=parseRat($('answer').value);if(!answer){$('answerResult').textContent='Inserisci un numero o una frazione valida.';return}let correct=eq(answer[0]/answer[1],state[state.hidden]);if(correct){state.solved=true;$('answerResult').textContent='✓ Corretto! Il valore è stato inserito nella proporzione.';$('checkAnswer').hidden=true;$('showSolution').hidden=true;render()}else{$('answerResult').textContent='Non corretto. Riprova senza visualizzare la soluzione.'}};$('exerciseCheck').onclick=()=>{if(!state.question||$('exerciseAnswer').value.trim()==='')return;const good=eq(Number($('exerciseAnswer').value),state.question.answer);state.attempts++;if(good)state.correct++;$('feedback').textContent=good?'✓ Risposta corretta!':$('mode').value==='test'?'Risposta errata.':`Risposta errata. Soluzione: ${fmt(state.question.answer)}.`;$('feedback').className=good?'ok':'bad';$('score').textContent=`Risposte corrette: ${state.correct} / ${state.attempts}`;state.question=null};$('nextExercise').onclick=newQuestion;$('reset').onclick=()=>{algebraTerms=null;algebraSolution=null;resetPropertySteps();Object.assign(state,{a:2,b:5,c:8,d:20,hidden:null});for(const key of ['a','b','c','d'])$(key).value=state[key];$('answerWrap').hidden=true;$('checkAnswer').hidden=true;$('showSolution').hidden=true;$('answerResult').textContent='';tableColumns=[1,2,3,4,5].map(v=>({source:'x',value:String(v)}));render()};$('generateRatio').onclick=generateRatio;
+$('genType').addEventListener('change',()=>{
+ const two=$('genType').value==='two';
+ $('genPosition').setAttribute('aria-label',two?'Posizioni delle due incognite':'Posizione incognita');
+ const label=$('genPosition').closest('label');
+ if(label)label.firstChild.textContent=two?'Posizioni incognite ':'Posizione incognita ';
+});
+$('ratioFormula').addEventListener('click',e=>{const el=e.target.closest('[data-hide]');if(el)hideRatioTerm(el.dataset.hide)});
+$('ratioFormula').addEventListener('keydown',e=>{const el=e.target.closest('[data-hide]');if(el&&(e.key==='Enter'||e.key===' ')){e.preventDefault();hideRatioTerm(el.dataset.hide)}});
+$('applyProperty').onclick=()=>{const base=ratioSnapshot();const current=propertySteps.length?propertySteps[propertySteps.length-1].values:base;if(!validProp(current)){$('propertyMessage').textContent='La proporzione di partenza non è valida.';return;}const choice=$('propertyChoice'),result=transformRatio(current,choice.value);if(!validProp(result)){$('propertyMessage').textContent='Trasformazione non applicabile: un denominatore risulterebbe nullo.';return;}
+if(algebraTerms){
+ let sym=algebraTerms;
+ for(const st of propertySteps)sym=affineTransform(sym,st.kind);
+ const after=affineTransform(sym,choice.value);
+ const check=algebraValidate(after);
+ if(check.error){$('propertyMessage').textContent=check.error;return}
+ const prev=propertySteps.length?propertySteps[propertySteps.length-1].tokens:sym.map(algebraDisplay);
+ const intermediate=transformTokens(prev,choice.value);
+ const final=after.map(algebraDisplay);
+ propertySteps.push({label:choice.options[choice.selectedIndex].text,kind:choice.value,values:result,tokens:final,sourceTokens:prev,middleTokens:intermediate,finalTokens:final,dependencies:[true,true,true,true],explanation:[]});
+ cancelPropertyAnimation();stepShown=0;selectedPropertySource=null;$('propertyMessage').dataset.manual='1';$('propertyMessage').textContent='Proprietà applicata: la soluzione resta invariata.';renderPropertyLab();return;
+}
+let masked=state.hidden&&!state.solved;let previous=propertySteps.length?propertySteps[propertySteps.length-1].tokens:ratioKeys.map(k=>masked&&k===state.hidden?'x':rationalHTML(String(state[k])));
+let intermediate=transformTokens(previous,choice.value);let oldDeps=propertySteps.length?propertySteps[propertySteps.length-1].dependencies:ratioKeys.map(k=>masked&&k===state.hidden);let deps=propertyDependencies(oldDeps,choice.value);let finalTokens=simplifyPropertyTokens(intermediate,choice.value,masked,result,deps);let source=ratioMarkup(previous),middle=ratioMarkup(intermediate),final=ratioMarkup(finalTokens);let arrows=propertyArrowSVG(previous,choice.value);
+propertySteps.push({label:choice.options[choice.selectedIndex].text,kind:choice.value,values:result,tokens:finalTokens,sourceTokens:previous,middleTokens:intermediate,finalTokens,dependencies:deps,arrows,explanation:[source,middle,final]});cancelPropertyAnimation();stepShown=0;selectedPropertySource=null;$('propertyMessage').dataset.manual='1';$('propertyMessage').textContent='Proprietà applicata: la proporzione resta valida.';renderPropertyLab();};
+$('stepsMode').onchange=()=>{cancelPropertyAnimation();stepShown=0;renderPropertyLab()};$('stepPrev').onclick=()=>{cancelPropertyAnimation();stepShown=Math.max(0,stepShown-1);renderPropertyLab()};$('stepNext').onclick=()=>{if(animationRunning)return;if(stepShown===0){playPropertyAnimation();return;}cancelPropertyAnimation();stepShown=Math.min(1+(algebraTerms?algebraVerificationStages():verificationStages()).length,stepShown+1);renderPropertyLab()};
+$('showSolution').onclick=()=>{if($('mode').value==='test')return;state.solved=true;$('answerResult').innerHTML='Soluzione: '+rationalHTML(String(state[state.hidden]));$('checkAnswer').hidden=true;$('showSolution').hidden=true;render()};
+$('undoProperty').onclick=()=>{cancelPropertyAnimation();propertySteps.pop();$('propertyMessage').dataset.manual='';renderPropertyLab()};
+$('resetProperties').onclick=()=>{resetPropertySteps();renderPropertyLab()};
+render();updateView();
+</script></body></html>
